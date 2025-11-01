@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Menu, X, Mail, Linkedin, Github, ChevronDown, Battery, Zap, BarChart3, Code, Award, Briefcase } from 'lucide-react';
-import ProjectCard from '../components/ProjectCard';
-import TestimonialsSection from '../components/TestimonialsSection';
-import ContactForm from '../components/ContactForm';
-import MediumIntegration from '../components/MediumIntegration';
-import GitHubStats from '../components/GitHubStats';
-import TechnologyStack from '../components/TechnologyStack';
+
+// Dynamic imports to prevent SSR issues
+const ProjectCard = dynamic(() => import('../components/ProjectCard'), { ssr: false });
+const TestimonialsSection = dynamic(() => import('../components/TestimonialsSection'), { ssr: false });
+const ContactForm = dynamic(() => import('../components/ContactForm'), { ssr: false });
+const MediumIntegration = dynamic(() => import('../components/MediumIntegration'), { ssr: false });
+const GitHubStats = dynamic(() => import('../components/GitHubStats'), { ssr: false });
+const TechnologyStack = dynamic(() => import('../components/TechnologyStack'), { ssr: false });
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [projects, setProjects] = useState([]);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure client-side rendering
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Load projects data with error handling
   useEffect(() => {
@@ -35,6 +44,15 @@ export default function Portfolio() {
         setProjects([]); // Set empty array as fallback
       });
   }, []);
+
+  // Prevent SSR hydration issues
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400"></div>
+      </div>
+    );
+  }
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -297,7 +315,7 @@ export default function Portfolio() {
                   <Github className="w-6 h-6" />
                   GitHub Activity
                 </h3>
-                <GitHubStats />
+                {isClient && <GitHubStats />}
               </div>
             </div>
             
@@ -424,7 +442,7 @@ export default function Portfolio() {
 
       {/* Technology Stack Section */}
       <section id="technologies">
-        <TechnologyStack />
+        {isClient && <TechnologyStack />}
       </section>
 
       {/* Education Section */}
@@ -452,16 +470,16 @@ export default function Portfolio() {
 
       {/* Medium Articles Section */}
       <section id="articles">
-        <MediumIntegration />
+        {isClient && <MediumIntegration />}
       </section>
 
       {/* Testimonials Section */}
       <section id="testimonials">
-        <TestimonialsSection />
+        {isClient && <TestimonialsSection />}
       </section>
 
       {/* Contact Section */}
-      <ContactForm />
+      {isClient && <ContactForm />}
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-blue-500/20 bg-slate-900">
