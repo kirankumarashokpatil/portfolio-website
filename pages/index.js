@@ -78,36 +78,183 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16">
-        <div className="max-w-4xl text-center">
-          <div className="mb-6 animate-pulse">
-            <Battery className="w-20 h-20 mx-auto text-blue-400" />
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-            Kirankumar Ashok Patil
-          </h1>
-          <p className="text-xl md:text-2xl text-blue-300 mb-4">
-            Quantitative Analyst | BESS Optimization Specialist
-          </p>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Production-focused expert in Battery Energy Storage Systems, MILP optimization, 
-            and automated trading solutions for UK energy markets
-          </p>
-          <div className="flex justify-center space-x-4 mb-8">
-            <a href="mailto:kirankumarashokpatil@gmail.com" className="p-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors">
-              <Mail className="w-6 h-6" />
-            </a>
-            <a href="https://linkedin.com/in/kirankumarashokpatil" target="_blank" rel="noopener noreferrer" className="p-3 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors">
-              <Linkedin className="w-6 h-6" />
-            </a>
-          </div>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="animate-bounce"
-          >
-            <ChevronDown className="w-8 h-8 text-blue-400" />
-          </button>
+      <section id="home" className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, #3b82f6 0%, transparent 50%),
+                             radial-gradient(circle at 75% 75%, #06b6d4 0%, transparent 50%),
+                             radial-gradient(circle at 50% 50%, #8b5cf6 0%, transparent 50%)`,
+            backgroundSize: '100px 100px, 150px 150px, 200px 200px',
+            animation: 'float 20s ease-in-out infinite'
+          }}></div>
         </div>
+
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full" style={{
+            backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)',
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative min-h-screen flex items-center justify-center px-4 pt-16">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Side - Professional Introduction */}
+            <div className="text-center lg:text-left space-y-8">
+              <div className="space-y-4">
+                <div className="inline-flex items-center space-x-3 px-4 py-2 bg-blue-600/20 backdrop-blur-sm rounded-full border border-blue-500/30">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-blue-300 font-medium">Available for opportunities</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="text-white">Hi, I'm </span>
+                  <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Kiran
+                  </span>
+                </h1>
+                
+                <h2 className="text-xl md:text-2xl text-blue-300 font-medium">
+                  Quantitative Analyst & AI Specialist
+                </h2>
+              </div>
+
+              <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Transforming complex energy markets through <span className="text-cyan-400 font-semibold">BESS optimization</span>, 
+                <span className="text-blue-400 font-semibold"> AI-driven forecasting</span>, and 
+                <span className="text-purple-400 font-semibold"> automated trading systems</span>. 
+                Bridging the gap between advanced mathematics and production-ready solutions.
+              </p>
+
+              {/* Key Highlights */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div className="bg-slate-800/40 backdrop-blur-sm p-4 rounded-xl border border-blue-500/20">
+                  <Battery className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">BESS</div>
+                  <div className="text-sm text-gray-400">Optimization Expert</div>
+                </div>
+                <div className="bg-slate-800/40 backdrop-blur-sm p-4 rounded-xl border border-cyan-500/20">
+                  <BarChart3 className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">MILP</div>
+                  <div className="text-sm text-gray-400">Modeling Specialist</div>
+                </div>
+                <div className="bg-slate-800/40 backdrop-blur-sm p-4 rounded-xl border border-purple-500/20">
+                  <Zap className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-white">AI/ML</div>
+                  <div className="text-sm text-gray-400">Systems Developer</div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a 
+                  href="mailto:kirankumarashokpatil@gmail.com" 
+                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium shadow-lg"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Let's Connect
+                </a>
+                <a 
+                  href="https://linkedin.com/in/kirankumarashokpatil" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-3 border-2 border-blue-500/50 hover:border-blue-400 text-blue-300 hover:text-blue-200 rounded-lg transition-all duration-300 backdrop-blur-sm hover:bg-blue-600/10 font-medium"
+                >
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  View LinkedIn
+                </a>
+              </div>
+            </div>
+
+            {/* Right Side - Visual Elements */}
+            <div className="relative">
+              {/* Professional Avatar Area */}
+              <div className="relative mx-auto w-80 h-80 lg:w-96 lg:h-96">
+                {/* Animated Rings */}
+                <div className="absolute inset-0 rounded-full border-2 border-blue-400/30 animate-spin-slow"></div>
+                <div className="absolute inset-4 rounded-full border-2 border-cyan-400/20 animate-spin-reverse"></div>
+                <div className="absolute inset-8 rounded-full border border-purple-400/20 animate-pulse"></div>
+                
+                {/* Profile Picture Placeholder */}
+                <div className="absolute inset-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 border border-blue-500/30 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-sm flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center text-white font-bold text-2xl">
+                        KP
+                      </div>
+                      <div className="text-white font-medium">Professional Photo</div>
+                      <div className="text-gray-400 text-sm">Coming Soon</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Tech Icons */}
+                <div className="absolute -top-4 -right-4 p-3 bg-blue-600/20 backdrop-blur-sm rounded-xl border border-blue-500/30 animate-float">
+                  <Code className="w-6 h-6 text-blue-400" />
+                </div>
+                <div className="absolute top-1/2 -left-6 p-3 bg-cyan-600/20 backdrop-blur-sm rounded-xl border border-cyan-500/30 animate-float-delay">
+                  <BarChart3 className="w-6 h-6 text-cyan-400" />
+                </div>
+                <div className="absolute -bottom-4 right-8 p-3 bg-purple-600/20 backdrop-blur-sm rounded-xl border border-purple-500/30 animate-float-delay-2">
+                  <Zap className="w-6 h-6 text-purple-400" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <button
+              onClick={() => scrollToSection('about')}
+              className="flex flex-col items-center space-y-2 text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              <span className="text-sm font-medium">Explore More</span>
+              <ChevronDown className="w-6 h-6 animate-bounce" />
+            </button>
+          </div>
+        </div>
+
+        {/* Custom CSS for animations */}
+        <style jsx>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+          }
+          @keyframes float-delay {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+          }
+          @keyframes float-delay-2 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+          }
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+          }
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          .animate-float-delay {
+            animation: float-delay 4s ease-in-out infinite 1s;
+          }
+          .animate-float-delay-2 {
+            animation: float-delay-2 5s ease-in-out infinite 2s;
+          }
+          .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+          }
+          .animate-spin-reverse {
+            animation: spin-reverse 15s linear infinite;
+          }
+        `}</style>
       </section>
 
       {/* About Section */}
