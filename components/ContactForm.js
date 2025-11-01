@@ -42,44 +42,46 @@ const ContactForm = () => {
 
     setStatus('loading');
 
-    try {
-      // Use Formspree for form handling (works with Vercel)
-      const response = await fetch('https://formspree.io/f/xdkopgpn', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || 'Portfolio Contact',
-          message: formData.message,
-          _replyto: formData.email,
-          _subject: `Portfolio Contact: ${formData.subject || 'New Message'}`
-        })
-      });
+    // Create a professional email with better formatting
+    const subject = formData.subject || 'Portfolio Contact Request';
+    const emailBody = `
+Portfolio Contact Form Submission
+================================
 
-      if (response.ok) {
+From: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject || 'General Inquiry'}
+
+Message:
+--------
+${formData.message}
+
+================================
+Sent from: ${window.location.href}
+Date: ${new Date().toLocaleString()}
+    `.trim();
+
+    const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+
+    try {
+      // Try to open the email client
+      const mailOpened = window.open(mailtoLink, '_blank');
+      
+      // Wait a moment to see if the email client opens
+      setTimeout(() => {
+        if (mailOpened) {
+          mailOpened.close();
+        }
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Server responded with ${response.status}`);
-      }
+      }, 1000);
+
     } catch (error) {
-      console.error('Contact form submission failed:', {
-        error: error,
-        message: error.message,
-        stack: error.stack
-      });
-      
-      // Fallback to mailto
-      const subject = formData.subject || 'Portfolio Contact';
-      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-      const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.open(mailtoLink, '_blank');
-      
-      setStatus('error');
+      console.error('Contact form error:', error);
+      // Fallback to direct location
+      window.location.href = mailtoLink;
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
     }
   };
 
@@ -167,8 +169,8 @@ const ContactForm = () => {
               </p>
               <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-3">
                 <p className="text-blue-300 text-xs">
-                  💡 <strong>Form Status:</strong> This contact form sends messages directly to my email. 
-                  If submission fails, your email client will open as a backup.
+                  💡 <strong>How it works:</strong> This form opens your email client with a pre-filled message. 
+                  Simply click "Send" in your email app to deliver your message directly to me.
                 </p>
               </div>
             </div>
@@ -285,24 +287,10 @@ const ContactForm = () => {
                   className="flex items-center gap-2 p-4 bg-green-600/20 border border-green-500/30 rounded-lg"
                 >
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <p className="text-green-400">Message sent successfully! I'll get back to you soon.</p>
-                </motion.div>
-              )}
-
-              {status === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 p-4 bg-red-600/20 border border-red-500/30 rounded-lg"
-                >
-                  <AlertCircle className="w-5 h-5 text-red-400" />
                   <div>
-                    <p className="text-red-400">Unable to send message through the form.</p>
+                    <p className="text-green-400">Email client opened successfully!</p>
                     <p className="text-gray-400 text-sm mt-1">
-                      Your email client should open as a backup. Or email me directly at{' '}
-                      <a href="mailto:kirankumarashokpatil@gmail.com" className="text-blue-400 hover:text-blue-300">
-                        kirankumarashokpatil@gmail.com
-                      </a>
+                      Please send the pre-filled email to complete your message. I'll respond within 24 hours.
                     </p>
                   </div>
                 </motion.div>
