@@ -1,0 +1,246 @@
+{
+  "technologies": {
+    "categories": [
+      {
+        "name": "Programming Languages",
+        "color": "blue",
+        "technologies": [
+          {
+            "name": "Python",
+            "icon": "🐍",
+            "proficiency": 95,
+            "description": "Production-grade development, ML/AI, optimization"
+          },
+          {
+            "name": "JavaScript",
+            "icon": "🟨",
+            "proficiency": 85,
+            "description": "Full-stack development, React, Node.js"
+          },
+          {
+            "name": "TypeScript",
+            "icon": "🔷",
+            "proficiency": 80,
+            "description": "Type-safe development, enterprise applications"
+          },
+          {
+            "name": "SQL",
+            "icon": "🗄️",
+            "proficiency": 90,
+            "description": "PostgreSQL, data analysis, optimization"
+          },
+          {
+            "name": "R",
+            "icon": "📊",
+            "proficiency": 75,
+            "description": "Statistical analysis, data science"
+          }
+        ]
+      },
+      {
+        "name": "AI & Machine Learning",
+        "color": "purple",
+        "technologies": [
+          {
+            "name": "PyTorch",
+            "icon": "🔥",
+            "proficiency": 90,
+            "description": "Deep learning, computer vision, NLP"
+          },
+          {
+            "name": "TensorFlow",
+            "icon": "🧠",
+            "proficiency": 85,
+            "description": "ML production, model deployment"
+          },
+          {
+            "name": "Hugging Face",
+            "icon": "🤗",
+            "proficiency": 85,
+            "description": "Transformers, NLP models, fine-tuning"
+          },
+          {
+            "name": "OpenAI",
+            "icon": "🤖",
+            "proficiency": 90,
+            "description": "GPT integration, LLM applications"
+          },
+          {
+            "name": "LangChain",
+            "icon": "🔗",
+            "proficiency": 85,
+            "description": "LLM orchestration, RAG systems"
+          },
+          {
+            "name": "Scikit-learn",
+            "icon": "⚙️",
+            "proficiency": 90,
+            "description": "Classical ML, data preprocessing"
+          }
+        ]
+      },
+      {
+        "name": "Data & Analytics",
+        "color": "green",
+        "technologies": [
+          {
+            "name": "pandas",
+            "icon": "🐼",
+            "proficiency": 95,
+            "description": "Data manipulation, time-series analysis"
+          },
+          {
+            "name": "NumPy",
+            "icon": "🔢",
+            "proficiency": 95,
+            "description": "Numerical computing, array operations"
+          },
+          {
+            "name": "Matplotlib",
+            "icon": "📈",
+            "proficiency": 85,
+            "description": "Data visualization, plotting"
+          },
+          {
+            "name": "Plotly",
+            "icon": "📊",
+            "proficiency": 80,
+            "description": "Interactive visualizations, dashboards"
+          },
+          {
+            "name": "Jupyter",
+            "icon": "📓",
+            "proficiency": 90,
+            "description": "Data exploration, prototyping"
+          }
+        ]
+      },
+      {
+        "name": "Optimization & Modeling",
+        "color": "orange",
+        "technologies": [
+          {
+            "name": "Gurobi",
+            "icon": "🎯",
+            "proficiency": 90,
+            "description": "MILP optimization, energy trading"
+          },
+          {
+            "name": "Pyomo",
+            "icon": "⚡",
+            "proficiency": 85,
+            "description": "Mathematical optimization modeling"
+          },
+          {
+            "name": "CPLEX",
+            "icon": "🧮",
+            "proficiency": 75,
+            "description": "Enterprise optimization solver"
+          },
+          {
+            "name": "SciPy",
+            "icon": "🔬",
+            "proficiency": 85,
+            "description": "Scientific computing, optimization"
+          }
+        ]
+      },
+      {
+        "name": "Cloud & Infrastructure",
+        "color": "cyan",
+        "technologies": [
+          {
+            "name": "AWS",
+            "icon": "☁️",
+            "proficiency": 85,
+            "description": "EC2, S3, Lambda, SageMaker"
+          },
+          {
+            "name": "Docker",
+            "icon": "🐳",
+            "proficiency": 85,
+            "description": "Containerization, deployment"
+          },
+          {
+            "name": "Kubernetes",
+            "icon": "⚓",
+            "proficiency": 75,
+            "description": "Container orchestration"
+          },
+          {
+            "name": "FastAPI",
+            "icon": "⚡",
+            "proficiency": 90,
+            "description": "High-performance APIs, ML serving"
+          },
+          {
+            "name": "Redis",
+            "icon": "🔴",
+            "proficiency": 80,
+            "description": "Caching, real-time data"
+          }
+        ]
+      },
+      {
+        "name": "Databases",
+        "color": "indigo",
+        "technologies": [
+          {
+            "name": "PostgreSQL",
+            "icon": "🐘",
+            "proficiency": 90,
+            "description": "Relational database, analytics"
+          },
+          {
+            "name": "MongoDB",
+            "icon": "🍃",
+            "proficiency": 75,
+            "description": "NoSQL, document storage"
+          },
+          {
+            "name": "TimescaleDB",
+            "icon": "⏰",
+            "proficiency": 80,
+            "description": "Time-series data, energy markets"
+          },
+          {
+            "name": "InfluxDB",
+            "icon": "📈",
+            "proficiency": 75,
+            "description": "Time-series monitoring"
+          }
+        ]
+      },
+      {
+        "name": "Development Tools",
+        "color": "gray",
+        "technologies": [
+          {
+            "name": "Git",
+            "icon": "🌿",
+            "proficiency": 90,
+            "description": "Version control, collaboration"
+          },
+          {
+            "name": "GitHub Actions",
+            "icon": "🤖",
+            "proficiency": 85,
+            "description": "CI/CD, automation"
+          },
+          {
+            "name": "VS Code",
+            "icon": "💻",
+            "proficiency": 95,
+            "description": "Development environment"
+          },
+          {
+            "name": "Pytest",
+            "icon": "🧪",
+            "proficiency": 85,
+            "description": "Testing, quality assurance"
+          }
+        ]
+      }
+    ]
+  }
+}

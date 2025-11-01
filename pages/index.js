@@ -5,6 +5,7 @@ import TestimonialsSection from '../components/TestimonialsSection';
 import ContactForm from '../components/ContactForm';
 import MediumIntegration from '../components/MediumIntegration';
 import GitHubStats from '../components/GitHubStats';
+import TechnologyStack from '../components/TechnologyStack';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function Portfolio() {
             
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Experience', 'Projects', 'Articles', 'Testimonials', 'Contact'].map((item) => (
+              {['Home', 'About', 'Experience', 'Projects', 'Technologies', 'Articles', 'Testimonials', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -63,7 +64,7 @@ export default function Portfolio() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-slate-800 border-t border-blue-500/20">
-            {['Home', 'About', 'Experience', 'Projects', 'Articles', 'Testimonials', 'Contact'].map((item) => (
+            {['Home', 'About', 'Experience', 'Projects', 'Technologies', 'Articles', 'Testimonials', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -252,41 +253,18 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 bg-slate-900/50">
+      {/* Technology Stack Section */}
+      <section id="technologies">
+        <TechnologyStack />
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-20 px-4 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Technical Skills</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Education</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
-              <h3 className="text-xl font-bold mb-4 text-blue-400">Languages & Tools</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'Julia', 'MATLAB', 'SQL', 'Git', 'Docker'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 bg-blue-600/20 rounded-lg text-sm">{skill}</span>
-                ))}
-              </div>
-            </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
-              <h3 className="text-xl font-bold mb-4 text-cyan-400">Optimization & ML</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Gurobi', 'CPLEX', 'Pyomo', 'PyTorch', 'TensorFlow', 'scikit-learn'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 bg-cyan-600/20 rounded-lg text-sm">{skill}</span>
-                ))}
-              </div>
-            </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
-              <h3 className="text-xl font-bold mb-4 text-purple-400">Data & Visualization</h3>
-              <div className="flex flex-wrap gap-2">
-                {['Tableau', 'Power BI', 'pandas', 'NumPy', 'Excel'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 bg-purple-600/20 rounded-lg text-sm">{skill}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Education */}
-          <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
               <Award className="w-8 h-8 text-blue-400 mb-3" />
               <h3 className="text-xl font-bold mb-2">MSc Applied Artificial Intelligence</h3>
