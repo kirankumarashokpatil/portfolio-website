@@ -9,13 +9,25 @@ const TechnologyStack = () => {
 
   useEffect(() => {
     fetch('/data/technologies.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        setTechnologies(data.technologies);
+        // Ensure data structure is correct
+        if (data && data.technologies && Array.isArray(data.technologies.categories)) {
+          setTechnologies(data.technologies);
+        } else {
+          console.warn('Technologies data is not in expected format:', data);
+          setTechnologies({ categories: [] }); // Set empty structure as fallback
+        }
         setIsLoading(false);
       })
       .catch(error => {
         console.error('Error loading technologies:', error);
+        setTechnologies({ categories: [] }); // Set empty structure as fallback
         setIsLoading(false);
       });
   }, []);
@@ -84,7 +96,8 @@ const TechnologyStack = () => {
 
         {/* Technology Grid */}
         <div className="space-y-12">
-          {technologies.categories.map((category, categoryIndex) => (
+          {technologies && technologies.categories && technologies.categories.length > 0 ? (
+            technologies.categories.map((category, categoryIndex) => (
             <motion.div
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
@@ -183,7 +196,12 @@ const TechnologyStack = () => {
                 </motion.div>
               )}
             </motion.div>
-          ))}
+          ))
+          ) : (
+            <div className="text-center text-gray-400 py-12">
+              <p>Loading technologies...</p>
+            </div>
+          )}
         </div>
 
         {/* Summary Stats */}

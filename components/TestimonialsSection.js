@@ -9,13 +9,25 @@ const TestimonialsSection = () => {
 
   useEffect(() => {
     fetch('/data/testimonials.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        setTestimonials(data.testimonials);
+        // Ensure data structure is correct
+        if (data && Array.isArray(data.testimonials)) {
+          setTestimonials(data.testimonials);
+        } else {
+          console.warn('Testimonials data is not in expected format:', data);
+          setTestimonials([]); // Set empty array as fallback
+        }
         setIsLoading(false);
       })
       .catch(error => {
         console.error('Error loading testimonials:', error);
+        setTestimonials([]); // Set empty array as fallback
         setIsLoading(false);
       });
   }, []);

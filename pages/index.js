@@ -12,12 +12,28 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [projects, setProjects] = useState([]);
 
-  // Load projects data
+  // Load projects data with error handling
   useEffect(() => {
     fetch('/data/projects.json')
-      .then(response => response.json())
-      .then(data => setProjects(data.projects))
-      .catch(error => console.error('Error loading projects:', error));
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Ensure data.projects exists and is an array
+        if (data && Array.isArray(data.projects)) {
+          setProjects(data.projects);
+        } else {
+          console.warn('Projects data is not in expected format:', data);
+          setProjects([]); // Set empty array as fallback
+        }
+      })
+      .catch(error => {
+        console.error('Error loading projects:', error);
+        setProjects([]); // Set empty array as fallback
+      });
   }, []);
 
   const scrollToSection = (sectionId) => {
@@ -377,9 +393,15 @@ export default function Portfolio() {
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Key Projects</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+            {projects && projects.length > 0 ? (
+              projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))
+            ) : (
+              <div className="col-span-2 text-center text-gray-400">
+                <p>Loading projects...</p>
+              </div>
+            )}
           </div>
           
           {/* GitHub Integration Note */}
