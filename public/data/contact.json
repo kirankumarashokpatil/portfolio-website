@@ -1,0 +1,25 @@
+{
+  "personal": {
+    "name": "Kirankumar Ashok Patil",
+    "title": "BESS Optimisation Engineer and AI Engineer",
+    "email": "kirankumarashokpatil@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/kirankumarashokpatil?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B58XM%2FOj3Q9Oj5%2Fy8hszx0A%3D%3D",
+    "github": "https://github.com/https://github.com/kirankumarashokpatil",
+    "location": "London, UK",
+    "phone": null
+  },
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/kirankumarashokpatil?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B58XM%2FOj3Q9Oj5%2Fy8hszx0A%3D%3D",
+    "github": "https://github.com/kirankumarashokpatil",
+    "email": "kirankumarashokpatil@gmail.com",
+    "twitter": null,
+    "medium": null,
+    "devto": null
+  },
+  "config": {
+    "show_phone": false,
+    "show_location": true,
+    "enable_contact_form": false,
+    "analytics_enabled": false
+  }
+}
