@@ -43,27 +43,35 @@ const ContactForm = () => {
     setStatus('loading');
 
     try {
-      // Submit to Netlify Forms
-      const formData2 = new FormData();
-      formData2.append('form-name', 'contact');
-      formData2.append('name', formData.name);
-      formData2.append('email', formData.email);
-      formData2.append('subject', formData.subject || 'Portfolio Contact');
-      formData2.append('message', formData.message);
-
-      const response = await fetch('/', {
+      // Use Formspree for form handling (works with Vercel)
+      const response = await fetch('https://formspree.io/f/xdkopgpn', {
         method: 'POST',
-        body: formData2
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'Portfolio Contact',
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `Portfolio Contact: ${formData.subject || 'New Message'}`
+        })
       });
 
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error('Failed to send message');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server responded with ${response.status}`);
       }
     } catch (error) {
-      console.error('Contact form error:', error);
+      console.error('Contact form submission failed:', {
+        error: error,
+        message: error.message,
+        stack: error.stack
+      });
       
       // Fallback to mailto
       const subject = formData.subject || 'Portfolio Contact';
@@ -153,10 +161,16 @@ const ContactForm = () => {
 
             <div className="bg-slate-800/50 rounded-xl p-6 border border-blue-500/20">
               <h4 className="text-white font-semibold mb-3">Response Time</h4>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-sm mb-3">
                 I typically respond to messages within 24 hours. For urgent matters, 
                 feel free to reach out via LinkedIn for faster response.
               </p>
+              <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-3">
+                <p className="text-blue-300 text-xs">
+                  💡 <strong>Form Status:</strong> This contact form sends messages directly to my email. 
+                  If submission fails, your email client will open as a backup.
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -167,10 +181,7 @@ const ContactForm = () => {
             viewport={{ once: true }}
             className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20"
           >
-            <form onSubmit={handleSubmit} className="space-y-6" name="contact" data-netlify="true" netlify-honeypot="bot-field">
-              {/* Hidden bot field for spam protection */}
-              <input type="hidden" name="bot-field" />
-              <input type="hidden" name="form-name" value="contact" />
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-white font-semibold mb-2">
