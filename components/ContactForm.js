@@ -43,22 +43,17 @@ const ContactForm = () => {
     setStatus('loading');
 
     try {
-      // Create mailto link as fallback
-      const subject = formData.subject || 'Portfolio Contact';
-      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-      const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      // Try to send via form service (you can integrate with Netlify Forms, Formspree, etc.)
-      const response = await fetch('/__netlify/functions/contact', {
+      // Submit to Netlify Forms
+      const formData2 = new FormData();
+      formData2.append('form-name', 'contact');
+      formData2.append('name', formData.name);
+      formData2.append('email', formData.email);
+      formData2.append('subject', formData.subject || 'Portfolio Contact');
+      formData2.append('message', formData.message);
+
+      const response = await fetch('/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      }).catch(() => {
-        // Fallback to mailto
-        window.location.href = mailtoLink;
-        return { ok: true };
+        body: formData2
       });
 
       if (response.ok) {
@@ -69,6 +64,13 @@ const ContactForm = () => {
       }
     } catch (error) {
       console.error('Contact form error:', error);
+      
+      // Fallback to mailto
+      const subject = formData.subject || 'Portfolio Contact';
+      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+      const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(mailtoLink, '_blank');
+      
       setStatus('error');
     }
   };
@@ -165,7 +167,10 @@ const ContactForm = () => {
             viewport={{ once: true }}
             className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" name="contact" data-netlify="true" netlify-honeypot="bot-field">
+              {/* Hidden bot field for spam protection */}
+              <input type="hidden" name="bot-field" />
+              <input type="hidden" name="form-name" value="contact" />
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-white font-semibold mb-2">
@@ -280,7 +285,15 @@ const ContactForm = () => {
                   className="flex items-center gap-2 p-4 bg-red-600/20 border border-red-500/30 rounded-lg"
                 >
                   <AlertCircle className="w-5 h-5 text-red-400" />
-                  <p className="text-red-400">Failed to send message. Please try again or email directly.</p>
+                  <div>
+                    <p className="text-red-400">Unable to send message through the form.</p>
+                    <p className="text-gray-400 text-sm mt-1">
+                      Your email client should open as a backup. Or email me directly at{' '}
+                      <a href="mailto:kirankumarashokpatil@gmail.com" className="text-blue-400 hover:text-blue-300">
+                        kirankumarashokpatil@gmail.com
+                      </a>
+                    </p>
+                  </div>
                 </motion.div>
               )}
             </form>
