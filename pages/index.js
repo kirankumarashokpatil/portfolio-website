@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, Mail, Linkedin, Github, ChevronDown, Battery, Zap, BarChart3, Code, Award, Briefcase } from 'lucide-react';
+import ProjectCard from '../components/ProjectCard';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [projects, setProjects] = useState([]);
+
+  // Load projects data
+  useEffect(() => {
+    fetch('/data/projects.json')
+      .then(response => response.json())
+      .then(data => setProjects(data.projects))
+      .catch(error => console.error('Error loading projects:', error));
+  }, []);
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -202,62 +212,26 @@ export default function Portfolio() {
           <h2 className="text-4xl font-bold mb-12 text-center">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Key Projects</span>
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-blue-900/50 to-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all">
-              <Battery className="w-12 h-12 text-blue-400 mb-4" />
-              <h3 className="text-2xl font-bold mb-4">MILP BESS Optimizer</h3>
-              <p className="text-gray-300 mb-4">
-                Full-stack development of MILP scheduler for multi-GW BESS deployment. Integrated data ingestion, 
-                probabilistic forecasting, optimization, and post-processing for trading desk.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-blue-600/30 rounded-full text-sm">MILP</span>
-                <span className="px-3 py-1 bg-blue-600/30 rounded-full text-sm">Pyomo</span>
-                <span className="px-3 py-1 bg-blue-600/30 rounded-full text-sm">Gurobi</span>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-cyan-900/50 to-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all">
-              <Zap className="w-12 h-12 text-cyan-400 mb-4" />
-              <h3 className="text-2xl font-bold mb-4">Marine BESS Optimizer</h3>
-              <p className="text-gray-300 mb-4">
-                Developed scheduling algorithm to optimize charging for 100+ MW vessel chargers at UK ports, 
-                ensuring compliance with port power limits and improving utilization.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-cyan-600/30 rounded-full text-sm">Optimization</span>
-                <span className="px-3 py-1 bg-cyan-600/30 rounded-full text-sm">Python</span>
-                <span className="px-3 py-1 bg-cyan-600/30 rounded-full text-sm">BESS</span>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-900/50 to-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all">
-              <Code className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold mb-4">AI Vision-Based Navigation</h3>
-              <p className="text-gray-300 mb-4">
-                Developed AI solution for airborne vision-based navigation and UAS positioning using optimized 
-                SLAM and vision transformers for real-time performance.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-purple-600/30 rounded-full text-sm">Deep Learning</span>
-                <span className="px-3 py-1 bg-purple-600/30 rounded-full text-sm">SLAM</span>
-                <span className="px-3 py-1 bg-purple-600/30 rounded-full text-sm">Computer Vision</span>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-900/50 to-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all">
-              <Briefcase className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-2xl font-bold mb-4">Multi-Agent Airspace Pricing</h3>
-              <p className="text-gray-300 mb-4">
-                Designed multi-agent reinforcement learning algorithms for dynamic airspace pricing, 
-                balancing drones and manned aircraft operations.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-green-600/30 rounded-full text-sm">RL</span>
-                <span className="px-3 py-1 bg-green-600/30 rounded-full text-sm">Multi-Agent</span>
-                <span className="px-3 py-1 bg-green-600/30 rounded-full text-sm">Optimization</span>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+          
+          {/* GitHub Integration Note */}
+          <div className="mt-12 text-center">
+            <p className="text-gray-400 mb-4">
+              🔄 This portfolio automatically syncs with GitHub repositories
+            </p>
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg hover:from-gray-600 hover:to-gray-500 transition-all duration-300"
+            >
+              <Github className="w-5 h-5" />
+              View All Projects on GitHub
+            </a>
           </div>
         </div>
       </section>

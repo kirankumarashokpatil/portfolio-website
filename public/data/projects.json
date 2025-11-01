@@ -12,6 +12,9 @@
       "tags": ["MILP", "Pyomo", "Gurobi", "Time-Series"],
       "category": "optimization",
       "featured": true,
+      "demoVideo": "/videos/bess-optimizer-demo.mp4",
+      "githubUrl": "https://github.com/yourusername/bess-optimizer",
+      "liveDemo": "https://bess-optimizer-demo.vercel.app",
       "details": {
         "problem": "Complex energy trading optimization for large-scale battery systems",
         "solution": "End-to-end MILP optimization with real-time data integration",
@@ -31,6 +34,9 @@
       "tags": ["PyTorch", "ViT", "SLAM", "Computer Vision"],
       "category": "ai-research",
       "featured": true,
+      "demoVideo": "/videos/vision-nav-demo.mp4",
+      "githubUrl": "https://github.com/yourusername/vision-transformer-nav",
+      "liveDemo": "https://vision-nav-demo.vercel.app",
       "details": {
         "problem": "Autonomous navigation without GPS in complex environments",
         "solution": "Vision Transformer-based SLAM with optimized feature extraction",
