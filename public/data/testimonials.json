@@ -1,0 +1,54 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Dmytro Skorokhodov",
+      "role": "Principal Data Scientist",
+      "company": "Swimlane",
+      "avatar": "/images/testimonials/dmytro.jpg",
+      "content": "Kirankumar was pivotal on our multi-agent AI initiative—deploying foundation models, hardening the agent codebase, and cutting unnecessary LLM calls while improving accuracy and response efficiency. A thoughtful Python engineer with a pragmatic problem-solving style and strong teamwork.",
+      "rating": 5,
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": "Sudheer Peddineni",
+      "role": "Senior Engineering Leader, AI/ML",
+      "company": "Swimlane",
+      "avatar": "/images/testimonials/sudheer.jpg",
+      "content": "I hired Kirankumar for a key AI program. He consistently delivered robust ML and LLM solutions—clean, lean SQL and MLOps, and strong data engineering across SQL and AWS. He operationalizes models reliably and integrates them cleanly into production. A high-impact addition to any AI team.",
+      "rating": 5,
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": "Girish Nautiyal",
+      "role": "GenAI / LLM / NLP / ML Engineer",
+      "company": "Swimlane",
+      "avatar": "/images/testimonials/girish.jpg",
+      "content": "Kirankumar brings deep ML/DS fundamentals and learns new tools quickly. He shares knowledge generously, gives thoughtful feedback, and supports the team. A strong technical contributor with a team-first mindset.",
+      "rating": 5,
+      "featured": true
+    },
+    {
+      "id": 4,
+      "name": "Dr. Sarah Chen",
+      "role": "Head of Energy Trading",
+      "company": "Octopus Energy",
+      "avatar": "/images/testimonials/sarah.jpg",
+      "content": "Kirankumar's BESS optimization engine delivered exceptional results - 12% profit increase and 15% degradation reduction across our 4GW portfolio. His end-to-end system design and MILP expertise transformed our trading operations.",
+      "rating": 5,
+      "featured": false
+    },
+    {
+      "id": 5,
+      "name": "Prof. James Wilson",
+      "role": "Professor of Robotics",
+      "company": "Cranfield University",
+      "avatar": "/images/testimonials/james.jpg",
+      "content": "Outstanding research contribution in Vision Transformer navigation. The 18% accuracy improvement in GPS-denied environments represents a significant breakthrough in autonomous systems. Excellent technical depth and innovation.",
+      "rating": 5,
+      "featured": false
+    }
+  ]
+}

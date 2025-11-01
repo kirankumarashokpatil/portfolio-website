@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Mail, Linkedin, Github, ChevronDown, Battery, Zap, BarChart3, Code, Award, Briefcase } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
+import TestimonialsSection from '../components/TestimonialsSection';
+import ContactForm from '../components/ContactForm';
+import MediumIntegration from '../components/MediumIntegration';
+import GitHubStats from '../components/GitHubStats';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +37,7 @@ export default function Portfolio() {
             
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
+              {['Home', 'About', 'Experience', 'Projects', 'Articles', 'Testimonials', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -59,7 +63,7 @@ export default function Portfolio() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-slate-800 border-t border-blue-500/20">
-            {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
+            {['Home', 'About', 'Experience', 'Projects', 'Articles', 'Testimonials', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -112,15 +116,27 @@ export default function Portfolio() {
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">About Me</span>
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
-              <h3 className="text-2xl font-bold mb-4 text-blue-400">Profile</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Production-focused Quantitative Analyst specializing in Battery Energy Storage Systems (BESS). 
-                Experienced in building MILP optimizers, probabilistic market forecasts, and automated trading 
-                solutions for UK energy markets. Strong track record integrating telemetry and physical battery 
-                models with market-facing bidding strategies.
-              </p>
+            <div className="space-y-8">
+              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
+                <h3 className="text-2xl font-bold mb-4 text-blue-400">Profile</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Production-focused Quantitative Analyst specializing in Battery Energy Storage Systems (BESS). 
+                  Experienced in building MILP optimizers, probabilistic market forecasts, and automated trading 
+                  solutions for UK energy markets. Strong track record integrating telemetry and physical battery 
+                  models with market-facing bidding strategies.
+                </p>
+              </div>
+              
+              {/* GitHub Stats */}
+              <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-500/20">
+                <h3 className="text-xl font-bold mb-4 text-blue-400 flex items-center gap-2">
+                  <Github className="w-6 h-6" />
+                  GitHub Activity
+                </h3>
+                <GitHubStats />
+              </div>
             </div>
+            
             <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
               <h3 className="text-2xl font-bold mb-4 text-blue-400">Core Expertise</h3>
               <ul className="space-y-2 text-gray-300">
@@ -287,38 +303,18 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Get In Touch</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Interested in BESS optimization, energy trading, or collaboration opportunities?
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <a
-              href="mailto:kirankumarashokpatil@gmail.com"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 rounded-lg font-semibold transition-all flex items-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              Email Me
-            </a>
-            <a
-              href="https://linkedin.com/in/kirankumarashokpatil"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition-all flex items-center gap-2 border border-blue-500/20"
-            >
-              <Linkedin className="w-5 h-5" />
-              LinkedIn
-            </a>
-          </div>
-          <p className="mt-8 text-gray-400">
-            📍 London, UK • +44 07393 103415
-          </p>
-        </div>
+      {/* Medium Articles Section */}
+      <section id="articles">
+        <MediumIntegration />
       </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials">
+        <TestimonialsSection />
+      </section>
+
+      {/* Contact Section */}
+      <ContactForm />
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-blue-500/20 bg-slate-900">
