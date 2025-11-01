@@ -166,10 +166,10 @@ const MediumIntegration = () => {
             </h3>
             {(() => {
               const featuredPost = posts.find(post => post.featured);
-              return (
+              return featuredPost ? (
                 <div className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 backdrop-blur-sm p-8 rounded-2xl border border-yellow-500/30">
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {featuredPost.tags.map((tag, index) => (
+                    {(featuredPost.tags || []).map((tag, index) => (
                       <span
                         key={index}
                         className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm"
@@ -203,16 +203,16 @@ const MediumIntegration = () => {
                     </a>
                   </div>
                 </div>
-              );
+              ) : null;
             })()}
           </motion.div>
         )}
 
         {/* Articles Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.filter(post => !post.featured).map((post, index) => (
+          {(posts || []).filter(post => !post.featured).map((post, index) => (
             <motion.article
-              key={post.id}
+              key={post.id || index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -220,7 +220,7 @@ const MediumIntegration = () => {
               className="bg-slate-800/30 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 group"
             >
               <div className="flex flex-wrap gap-2 mb-4">
-                {post.tags.slice(0, 2).map((tag, tagIndex) => (
+                {(post.tags || []).slice(0, 2).map((tag, tagIndex) => (
                   <span
                     key={tagIndex}
                     className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs"

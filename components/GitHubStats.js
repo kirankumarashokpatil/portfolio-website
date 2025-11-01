@@ -117,22 +117,22 @@ const GitHubStats = () => {
           Language Distribution
         </h4>
         <div className="space-y-3">
-          {stats.languages.map((lang, index) => (
-            <div key={lang.name} className="flex items-center">
-              <div className="w-3 h-3 rounded-full mr-3" style={{ backgroundColor: lang.color }}></div>
-              <span className="text-gray-300 text-sm flex-1">{lang.name}</span>
-              <span className="text-gray-400 text-sm">{lang.percentage}%</span>
+          {(stats.languages || []).map((lang, index) => (
+            <div key={lang.name || index} className="flex items-center">
+              <div className="w-3 h-3 rounded-full mr-3" style={{ backgroundColor: lang.color || '#gray' }}></div>
+              <span className="text-gray-300 text-sm flex-1">{lang.name || 'Unknown'}</span>
+              <span className="text-gray-400 text-sm">{lang.percentage || 0}%</span>
             </div>
           ))}
         </div>
         <div className="mt-4 h-2 bg-slate-700 rounded-full overflow-hidden flex">
-          {stats.languages.map((lang, index) => (
+          {(stats.languages || []).map((lang, index) => (
             <div
-              key={lang.name}
+              key={lang.name || index}
               className="h-full"
               style={{
-                backgroundColor: lang.color,
-                width: `${lang.percentage}%`
+                backgroundColor: lang.color || '#gray',
+                width: `${lang.percentage || 0}%`
               }}
             ></div>
           ))}
@@ -148,14 +148,14 @@ const GitHubStats = () => {
       >
         <h4 className="text-white font-semibold mb-4">Recent Activity</h4>
         <div className="space-y-3">
-          {stats.recentActivity.map((activity, index) => (
+          {(stats.recentActivity || []).map((activity, index) => (
             <div key={index} className="flex items-center justify-between text-sm">
               <span className="text-gray-300">
-                <span className="text-blue-400">{activity.action}</span> to{' '}
-                <span className="font-mono">{activity.repo}</span>
+                <span className="text-blue-400">{activity.action || 'activity'}</span> to{' '}
+                <span className="font-mono">{activity.repo || 'repository'}</span>
               </span>
               <span className="text-gray-400">
-                {new Date(activity.date).toLocaleDateString()}
+                {activity.date ? new Date(activity.date).toLocaleDateString() : 'Recently'}
               </span>
             </div>
           ))}
