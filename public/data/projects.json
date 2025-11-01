@@ -1,0 +1,80 @@
+{
+  "projects": [
+    {
+      "id": "bess-optimizer",
+      "title": "MILP BESS Optimizer",
+      "description": "Production-grade optimization engine for multi-GW BESS deployment. Architected end-to-end system: data ingestion, probabilistic forecasting, MILP scheduling, and post-processing for trading desk.",
+      "impact": {
+        "profitability": "+12%",
+        "degradation": "-15%",
+        "portfolio": "4 GW"
+      },
+      "tags": ["MILP", "Pyomo", "Gurobi", "Time-Series"],
+      "category": "optimization",
+      "featured": true,
+      "details": {
+        "problem": "Complex energy trading optimization for large-scale battery systems",
+        "solution": "End-to-end MILP optimization with real-time data integration",
+        "results": ["12% profitability increase", "15% degradation reduction", "Sub-second decision making"],
+        "technologies": ["Python", "Pyomo", "Gurobi", "PostgreSQL", "Docker"]
+      }
+    },
+    {
+      "id": "vision-transformer-nav",
+      "title": "Vision Transformer Navigation",
+      "description": "Solved autonomous navigation in GPS-denied environments using Vision Transformers and optimized SLAM. Achieved state-of-the-art 18% accuracy improvement over existing benchmarks.",
+      "impact": {
+        "accuracy": "+18%",
+        "environment": "GPS-denied",
+        "method": "ViT + SLAM"
+      },
+      "tags": ["PyTorch", "ViT", "SLAM", "Computer Vision"],
+      "category": "ai-research",
+      "featured": true,
+      "details": {
+        "problem": "Autonomous navigation without GPS in complex environments",
+        "solution": "Vision Transformer-based SLAM with optimized feature extraction",
+        "results": ["18% accuracy improvement", "Real-time performance", "Robust in challenging conditions"],
+        "technologies": ["PyTorch", "OpenCV", "ROS", "C++", "Python"]
+      }
+    },
+    {
+      "id": "multi-agent-airspace",
+      "title": "Multi-Agent Airspace Pricing",
+      "description": "Groundbreaking MARL system for autonomous airspace management and pricing. Achieved 40% throughput increase while maintaining strict safety protocols through custom evaluation framework.",
+      "impact": {
+        "throughput": "+40%",
+        "safety": "Maintained",
+        "method": "MARL"
+      },
+      "tags": ["MARL", "RL", "Multi-Agent", "Optimization"],
+      "category": "ai-research",
+      "featured": true,
+      "details": {
+        "problem": "Optimizing airspace utilization with autonomous pricing",
+        "solution": "Multi-agent reinforcement learning with custom evaluation metrics",
+        "results": ["40% throughput increase", "Safety protocol compliance", "Dynamic pricing optimization"],
+        "technologies": ["Python", "TensorFlow", "Ray", "Gym", "Matplotlib"]
+      }
+    },
+    {
+      "id": "marine-bess-optimizer",
+      "title": "Marine BESS Optimizer",
+      "description": "Scheduling algorithm optimizing 100+ MW vessel chargers at UK ports. Ensures port power compliance while maximizing utilization and revenue.",
+      "impact": {
+        "capacity": "100+ MW",
+        "location": "UK Ports",
+        "optimization": "Revenue Max"
+      },
+      "tags": ["Optimization", "Python", "BESS", "Real-Time"],
+      "category": "optimization",
+      "featured": false,
+      "details": {
+        "problem": "Port power compliance while maximizing vessel charging revenue",
+        "solution": "Real-time scheduling algorithm with constraint optimization",
+        "results": ["Power compliance maintained", "Revenue maximized", "100+ MW capacity managed"],
+        "technologies": ["Python", "NumPy", "Pandas", "FastAPI", "Redis"]
+      }
+    }
+  ]
+}

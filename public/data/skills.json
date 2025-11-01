@@ -1,0 +1,59 @@
+{
+  "skillCategories": [
+    {
+      "title": "LLMs & GenAI",
+      "color": "blue",
+      "icon": "brain",
+      "skills": [
+        {"name": "Agentic Systems", "level": 95, "experience": "2+ years"},
+        {"name": "RAG", "level": 90, "experience": "1.5+ years"},
+        {"name": "Fine-Tuning", "level": 88, "experience": "1+ year"},
+        {"name": "Prompt Engineering", "level": 92, "experience": "2+ years"},
+        {"name": "LangChain", "level": 85, "experience": "1+ year"},
+        {"name": "Vector DBs", "level": 80, "experience": "1+ year"}
+      ]
+    },
+    {
+      "title": "ML & Optimization",
+      "color": "cyan",
+      "icon": "zap",
+      "skills": [
+        {"name": "PyTorch", "level": 95, "experience": "3+ years"},
+        {"name": "TensorFlow", "level": 85, "experience": "2+ years"},
+        {"name": "Gurobi", "level": 90, "experience": "2+ years"},
+        {"name": "CPLEX", "level": 85, "experience": "1.5+ years"},
+        {"name": "Pyomo", "level": 92, "experience": "2+ years"},
+        {"name": "MARL", "level": 88, "experience": "1+ year"}
+      ]
+    },
+    {
+      "title": "MLOps & Infrastructure",
+      "color": "purple",
+      "icon": "code",
+      "skills": [
+        {"name": "Docker", "level": 90, "experience": "3+ years"},
+        {"name": "Kubernetes", "level": 85, "experience": "2+ years"},
+        {"name": "Terraform", "level": 80, "experience": "1+ year"},
+        {"name": "CI/CD", "level": 88, "experience": "3+ years"},
+        {"name": "GCP", "level": 85, "experience": "2+ years"},
+        {"name": "AWS", "level": 82, "experience": "2+ years"}
+      ]
+    }
+  ],
+  "programmingLanguages": [
+    {"name": "Python", "level": 95, "primary": true},
+    {"name": "JavaScript", "level": 85, "primary": false},
+    {"name": "TypeScript", "level": 80, "primary": false},
+    {"name": "SQL", "level": 90, "primary": false},
+    {"name": "C++", "level": 75, "primary": false},
+    {"name": "R", "level": 70, "primary": false}
+  ],
+  "frameworks": [
+    {"name": "Next.js", "category": "web"},
+    {"name": "React", "category": "web"},
+    {"name": "FastAPI", "category": "backend"},
+    {"name": "Django", "category": "backend"},
+    {"name": "PyTorch", "category": "ml"},
+    {"name": "TensorFlow", "category": "ml"}
+  ]
+}

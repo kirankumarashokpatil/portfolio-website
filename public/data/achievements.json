@@ -1,0 +1,62 @@
+{
+  "achievements": [
+    {
+      "id": "bess-optimization-impact",
+      "title": "4 GW BESS Portfolio Optimization",
+      "description": "Led development of production-grade optimization engine achieving significant performance improvements",
+      "metrics": {
+        "profitability": "+12%",
+        "degradation": "-15%",
+        "portfolio_size": "4 GW"
+      },
+      "date": "2024-10",
+      "category": "technical",
+      "icon": "battery"
+    },
+    {
+      "id": "ai-accuracy-improvement",
+      "title": "18% AI Navigation Accuracy Boost",
+      "description": "Achieved state-of-the-art improvement in GPS-denied navigation using Vision Transformers",
+      "metrics": {
+        "accuracy_improvement": "+18%",
+        "benchmark": "State-of-the-art"
+      },
+      "date": "2024-05",
+      "category": "research",
+      "icon": "brain"
+    },
+    {
+      "id": "marl-throughput",
+      "title": "40% Airspace Throughput Increase",
+      "description": "Developed multi-agent reinforcement learning system for autonomous airspace management",
+      "metrics": {
+        "throughput": "+40%",
+        "safety": "Maintained"
+      },
+      "date": "2024-03",
+      "category": "research",
+      "icon": "zap"
+    },
+    {
+      "id": "team-mentorship",
+      "title": "Technical Leadership & Mentorship",
+      "description": "Successfully mentored engineering teams on TDD, CI/CD, and technical best practices",
+      "metrics": {
+        "team_size": "8+ engineers",
+        "improvement": "Measurable"
+      },
+      "date": "2024-ongoing",
+      "category": "leadership",
+      "icon": "award"
+    }
+  ],
+  "stats": {
+    "total_projects": 15,
+    "years_experience": 4,
+    "teams_led": 3,
+    "publications": 2,
+    "patents_pending": 1,
+    "github_stars": 150,
+    "certifications": 8
+  }
+}

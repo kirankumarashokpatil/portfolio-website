@@ -1,0 +1,104 @@
+name: Update Blog Posts
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Daily at noon UTC
+  workflow_dispatch:      # Manual trigger
+
+jobs:
+  update-blog:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install rss-parser
+        
+      - name: Create blog update script
+        run: |
+          cat > update-blog.js << 'EOF'
+          const fs = require('fs');
+          const Parser = require('rss-parser');
+          
+          async function updateBlogPosts() {
+            try {
+              console.log('🔄 Fetching blog posts...');
+              
+              const parser = new Parser();
+              const feeds = [
+                // Add your blog RSS feeds here
+                // { name: 'Medium', url: 'https://medium.com/feed/@yourusername' },
+                // { name: 'Dev.to', url: 'https://dev.to/feed/yourusername' }
+              ];
+              
+              let allPosts = [];
+              
+              for (const feed of feeds) {
+                try {
+                  const parsedFeed = await parser.parseURL(feed.url);
+                  const posts = parsedFeed.items.slice(0, 5).map(item => ({
+                    title: item.title,
+                    link: item.link,
+                    pubDate: item.pubDate,
+                    description: item.contentSnippet || item.content?.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+                    source: feed.name,
+                    categories: item.categories || []
+                  }));
+                  allPosts = allPosts.concat(posts);
+                } catch (error) {
+                  console.warn(`⚠️ Could not fetch from ${feed.name}:`, error.message);
+                }
+              }
+              
+              // Sort by date and take most recent
+              allPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+              allPosts = allPosts.slice(0, 10);
+              
+              const blogData = {
+                posts: allPosts,
+                last_updated: new Date().toISOString(),
+                total_posts: allPosts.length
+              };
+              
+              // Ensure data directory exists
+              if (!fs.existsSync('public/data')) {
+                fs.mkdirSync('public/data', { recursive: true });
+              }
+              
+              // Write blog data
+              fs.writeFileSync('public/data/blog-posts.json', JSON.stringify(blogData, null, 2));
+              
+              console.log(`✅ Blog posts updated! Found ${allPosts.length} posts`);
+              
+            } catch (error) {
+              console.error('❌ Error updating blog posts:', error.message);
+              // Don't fail the workflow for blog updates
+              console.log('⚠️ Blog update failed, but continuing...');
+            }
+          }
+          
+          updateBlogPosts();
+          EOF
+          
+      - name: Update blog posts
+        run: node update-blog.js
+        continue-on-error: true
+        
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/data/blog-posts.json || true
+          if git diff --staged --quiet; then
+            echo "No blog changes to commit"
+          else
+            git commit -m "📝 Auto-update: Blog posts $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

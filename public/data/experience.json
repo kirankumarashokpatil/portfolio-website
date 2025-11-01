@@ -1,0 +1,61 @@
+{
+  "experience": [
+    {
+      "id": "natpower-uk",
+      "title": "Lead AI / Software Engineer",
+      "company": "Natpower UK",
+      "location": "London, UK",
+      "period": {
+        "start": "2024-07",
+        "end": "present",
+        "display": "July 2024 - Present"
+      },
+      "description": "Leading AI and optimization initiatives for multi-gigawatt BESS portfolios",
+      "achievements": [
+        {
+          "title": "Production-grade optimization engine",
+          "description": "Architected optimization engine for 4 GW BESS portfolio",
+          "impact": ["12% profitability increase", "15% degradation reduction"]
+        },
+        {
+          "title": "Low-latency data pipeline",
+          "description": "Engineered real-time market API pipeline",
+          "impact": ["Sub-second decision-making", "Terabyte-scale time-series processing"]
+        },
+        {
+          "title": "Technical leadership",
+          "description": "Mentored engineering teams on TDD and CI/CD",
+          "impact": ["Technical roadmap development", "Agentic monitoring systems"]
+        }
+      ],
+      "technologies": ["Python", "Pyomo", "Gurobi", "Docker", "Kubernetes", "PostgreSQL", "Redis"],
+      "category": "ai-engineering"
+    },
+    {
+      "id": "adani-mumbai",
+      "title": "Senior Executive",
+      "company": "Adani Electricity Mumbai Limited",
+      "location": "Mumbai, India",
+      "period": {
+        "start": "2020-12",
+        "end": "2022-07",
+        "display": "Dec 2020 - Jul 2022"
+      },
+      "description": "Cross-functional modernization and system integration leadership",
+      "achievements": [
+        {
+          "title": "Cross-functional modernization",
+          "description": "Drove modernization initiatives across departments",
+          "impact": ["15% efficiency increase", "20% downtime reduction"]
+        },
+        {
+          "title": "Technical planning",
+          "description": "Coordinated technical planning and system integration",
+          "impact": ["SAP integration", "Process optimization"]
+        }
+      ],
+      "technologies": ["SAP", "SQL", "Excel", "Project Management"],
+      "category": "systems-engineering"
+    }
+  ]
+}
