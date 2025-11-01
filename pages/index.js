@@ -224,7 +224,7 @@ export default function Portfolio() {
               🔄 This portfolio automatically syncs with GitHub repositories
             </p>
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/kirankumarashokpatil"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg hover:from-gray-600 hover:to-gray-500 transition-all duration-300"

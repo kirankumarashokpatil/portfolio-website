@@ -12,7 +12,7 @@
       "tags": ["MILP", "Pyomo", "Gurobi", "Time-Series"],
       "category": "optimization",
       "featured": true,
-      "demoVideo": "/videos/bess-optimizer-demo.mp4",
+      "_demoVideo": "/videos/bess-optimizer-demo.mp4",
       "githubUrl": "https://github.com/kirankumarashokpatil/bess-optimizer.git",
       "liveDemo": "https://bess-optimizer-demo.vercel.app",
       "details": {
@@ -34,7 +34,7 @@
       "tags": ["PyTorch", "ViT", "SLAM", "Computer Vision"],
       "category": "ai-research",
       "featured": true,
-      "demoVideo": "/videos/vision-nav-demo.mp4",
+      "_demoVideo": "/videos/vision-nav-demo.mp4",
       "githubUrl": "https://github.com/kirankumarashokpatil/vision-transformer-nav",
       "liveDemo": "https://vision-nav-demo.vercel.app",
       "details": {
@@ -56,7 +56,7 @@
       "tags": ["MARL", "RL", "Multi-Agent", "Optimization"],
       "category": "ai-research",
       "featured": true,
-      "demoVideo": "/videos/airspace-pricing-demo.mp4",
+      "_demoVideo": "/videos/airspace-pricing-demo.mp4",
       "githubUrl": "https://github.com/kirankumarashokpatil/multi-agent-airspace",
       "liveDemo": "https://airspace-pricing-demo.vercel.app",
       "details": {
@@ -78,7 +78,7 @@
       "tags": ["Optimization", "Python", "BESS", "Real-Time"],
       "category": "optimization",
       "featured": false,
-      "demoVideo": "/videos/marine-bess-demo.mp4",
+      "_demoVideo": "/videos/marine-bess-demo.mp4",
       "githubUrl": "https://github.com/kirankumarashokpatil/marine-bess-optimizer",
       "liveDemo": "https://marine-bess-demo.vercel.app",
       "details": {
