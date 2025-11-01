@@ -42,9 +42,40 @@ const ContactForm = () => {
 
     setStatus('loading');
 
-    // Create a professional email with better formatting
-    const subject = formData.subject || 'Portfolio Contact Request';
-    const emailBody = `
+    try {
+      // Use our own API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'Portfolio Contact',
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(result.error || `Server error: ${response.status}`);
+      }
+
+    } catch (error) {
+      console.error('Contact form submission failed:', {
+        error: error,
+        message: error.message,
+        stack: error.stack,
+      });
+
+      // Fallback to mailto with enhanced formatting
+      const subject = formData.subject || 'Portfolio Contact Request';
+      const emailBody = `
 Portfolio Contact Form Submission
 ================================
 
@@ -59,29 +90,19 @@ ${formData.message}
 ================================
 Sent from: ${window.location.href}
 Date: ${new Date().toLocaleString()}
-    `.trim();
+      `.trim();
 
-    const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:kirankumarashokpatil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
 
-    try {
-      // Try to open the email client
-      const mailOpened = window.open(mailtoLink, '_blank');
-      
-      // Wait a moment to see if the email client opens
-      setTimeout(() => {
-        if (mailOpened) {
-          mailOpened.close();
-        }
+      try {
+        window.open(mailtoLink, '_blank');
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 1000);
-
-    } catch (error) {
-      console.error('Contact form error:', error);
-      // Fallback to direct location
-      window.location.href = mailtoLink;
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      } catch (mailtoError) {
+        window.location.href = mailtoLink;
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }
     }
   };
 
@@ -169,8 +190,8 @@ Date: ${new Date().toLocaleString()}
               </p>
               <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-3">
                 <p className="text-blue-300 text-xs">
-                  💡 <strong>How it works:</strong> This form opens your email client with a pre-filled message. 
-                  Simply click "Send" in your email app to deliver your message directly to me.
+                  💡 <strong>Direct Delivery:</strong> Messages are sent directly to my email inbox. 
+                  If our server is unavailable, your email client will open as a backup.
                 </p>
               </div>
             </div>
@@ -288,9 +309,9 @@ Date: ${new Date().toLocaleString()}
                 >
                   <CheckCircle className="w-5 h-5 text-green-400" />
                   <div>
-                    <p className="text-green-400">Email client opened successfully!</p>
+                    <p className="text-green-400">Message sent successfully!</p>
                     <p className="text-gray-400 text-sm mt-1">
-                      Please send the pre-filled email to complete your message. I'll respond within 24 hours.
+                      Your message has been delivered to my inbox. I'll respond within 24 hours.
                     </p>
                   </div>
                 </motion.div>
