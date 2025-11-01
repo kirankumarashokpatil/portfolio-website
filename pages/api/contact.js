@@ -18,10 +18,10 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Portfolio Website <onboarding@resend.dev>',
+        from: 'Kirankumar Patil Portfolio <onboarding@resend.dev>',
         to: ['kirankumarashokpatil@gmail.com'],
         reply_to: email,
-        subject: `💼 Portfolio Inquiry: ${subject || 'New Message'} - from ${name}`,
+        subject: `New Contact: ${subject || 'Portfolio Inquiry'} - ${name}`,
         html: `
           <!DOCTYPE html>
           <html>
@@ -30,35 +30,35 @@ export default async function handler(req, res) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Portfolio Contact</title>
           </head>
-          <body style="margin: 0; padding: 20px; background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;">
-            <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+          <body style="margin: 0; padding: 0; background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            <div style="max-width: 600px; margin: 40px auto; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
               
-              <!-- Header -->
-              <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
-                <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 600;">💼 New Portfolio Contact</h1>
-                <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 16px;">Someone is interested in your work!</p>
+              <!-- Professional Header -->
+              <div style="background: #ffffff; padding: 40px 40px 30px 40px; border-bottom: 3px solid #2c3e50;">
+                <h1 style="color: #2c3e50; margin: 0; font-size: 28px; font-weight: 300; letter-spacing: -0.5px;">Portfolio Contact</h1>
+                <p style="color: #7f8c8d; margin: 8px 0 0 0; font-size: 16px; font-weight: 400;">New inquiry received</p>
               </div>
               
               <!-- Contact Information -->
-              <div style="padding: 30px;">
-                <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
-                  <h2 style="color: #1e293b; margin: 0 0 15px 0; font-size: 18px;">📝 Contact Details</h2>
-                  <table style="width: 100%; border-collapse: collapse;">
+              <div style="padding: 40px;">
+                <div style="margin-bottom: 35px;">
+                  <h2 style="color: #34495e; margin: 0 0 20px 0; font-size: 20px; font-weight: 500; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px;">Contact Information</h2>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
                     <tr>
-                      <td style="padding: 8px 0; font-weight: 600; color: #374151; width: 80px;">👤 Name:</td>
-                      <td style="padding: 8px 0; color: #111827;">${name}</td>
+                      <td style="padding: 12px 0; font-weight: 600; color: #7f8c8d; width: 120px;">Name</td>
+                      <td style="padding: 12px 0; color: #2c3e50; font-weight: 500;">${name}</td>
                     </tr>
-                    <tr>
-                      <td style="padding: 8px 0; font-weight: 600; color: #374151;">📧 Email:</td>
-                      <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #3b82f6; text-decoration: none;">${email}</a></td>
+                    <tr style="border-top: 1px solid #ecf0f1;">
+                      <td style="padding: 12px 0; font-weight: 600; color: #7f8c8d;">Email</td>
+                      <td style="padding: 12px 0;"><a href="mailto:${email}" style="color: #3498db; text-decoration: none; font-weight: 500;">${email}</a></td>
                     </tr>
-                    <tr>
-                      <td style="padding: 8px 0; font-weight: 600; color: #374151;">📋 Subject:</td>
-                      <td style="padding: 8px 0; color: #111827;">${subject || 'General Inquiry'}</td>
+                    <tr style="border-top: 1px solid #ecf0f1;">
+                      <td style="padding: 12px 0; font-weight: 600; color: #7f8c8d;">Subject</td>
+                      <td style="padding: 12px 0; color: #2c3e50; font-weight: 500;">${subject || 'General Inquiry'}</td>
                     </tr>
-                    <tr>
-                      <td style="padding: 8px 0; font-weight: 600; color: #374151;">🕒 Time:</td>
-                      <td style="padding: 8px 0; color: #6b7280;">${new Date().toLocaleString('en-US', { 
+                    <tr style="border-top: 1px solid #ecf0f1;">
+                      <td style="padding: 12px 0; font-weight: 600; color: #7f8c8d;">Date</td>
+                      <td style="padding: 12px 0; color: #7f8c8d; font-size: 14px;">${new Date().toLocaleString('en-US', { 
                         timeZone: 'Asia/Kolkata',
                         year: 'numeric',
                         month: 'long', 
@@ -72,33 +72,28 @@ export default async function handler(req, res) {
                 </div>
                 
                 <!-- Message Content -->
-                <div style="background: #ffffff; border: 2px solid #e5e7eb; border-radius: 8px; padding: 25px;">
-                  <h3 style="color: #1e293b; margin: 0 0 15px 0; font-size: 16px; display: flex; align-items: center;">
-                    💬 Message Content
-                  </h3>
-                  <div style="background: #f9fafb; padding: 20px; border-radius: 6px; border-left: 3px solid #10b981;">
-                    <p style="margin: 0; line-height: 1.6; color: #374151; white-space: pre-wrap; font-size: 15px;">${message}</p>
+                <div style="margin-bottom: 35px;">
+                  <h3 style="color: #34495e; margin: 0 0 15px 0; font-size: 18px; font-weight: 500; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px;">Message</h3>
+                  <div style="background: #f8f9fa; padding: 25px; border-left: 4px solid #3498db; margin: 15px 0;">
+                    <p style="margin: 0; line-height: 1.7; color: #2c3e50; white-space: pre-wrap; font-size: 15px;">${message}</p>
                   </div>
                 </div>
                 
-                <!-- Action Buttons -->
-                <div style="text-align: center; margin: 30px 0 20px 0;">
-                  <a href="mailto:${email}?subject=Re: ${subject || 'Portfolio Inquiry'}" 
-                     style="display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0 10px;">
-                    📧 Reply to ${name.split(' ')[0]}
-                  </a>
-                  <a href="mailto:${email}" 
-                     style="display: inline-block; background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0 10px;">
-                    ✉️ Send New Email
+                <!-- Action Button -->
+                <div style="text-align: center; margin: 40px 0 20px 0;">
+                  <a href="mailto:${email}?subject=Re: ${subject || 'Portfolio Inquiry'}&body=Hi ${name.split(' ')[0]},%0D%0A%0D%0AThank you for reaching out through my portfolio. " 
+                     style="display: inline-block; background: #3498db; color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 15px; transition: background-color 0.3s;">
+                    Reply to ${name.split(' ')[0]}
                   </a>
                 </div>
               </div>
               
-              <!-- Footer -->
-              <div style="background: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
-                <p style="margin: 0; color: #6b7280; font-size: 14px;">
-                  🌐 This message was sent from your <strong>Portfolio Contact Form</strong><br>
-                  <span style="color: #9ca3af;">Reply directly to respond to the sender</span>
+              <!-- Professional Footer -->
+              <div style="background: #ecf0f1; padding: 25px 40px; text-align: center; border-top: 1px solid #bdc3c7;">
+                <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.5;">
+                  This message was sent through your portfolio contact form at<br>
+                  <strong>portfolio-website-ashy-alpha-48.vercel.app</strong><br>
+                  <span style="color: #95a5a6;">Click reply above to respond directly to the sender</span>
                 </p>
               </div>
             </div>
