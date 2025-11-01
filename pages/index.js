@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Menu, X, Mail, Linkedin, Github, ChevronDown, Battery, Zap, BarChart3, Code, Award, Briefcase } from 'lucide-react';
+import ClientOnly from '../components/ClientOnly';
 
 // Dynamic imports to prevent SSR issues
 const ProjectCard = dynamic(() => import('../components/ProjectCard'), { ssr: false });
@@ -14,23 +15,17 @@ export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [projects, setProjects] = useState([]);
-  const [isClient, setIsClient] = useState(false);
-
-  // Ensure client-side rendering
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   // Load projects data with error handling
   useEffect(() => {
-    fetch('/data/projects.json')
-      .then(response => {
+    const loadProjects = async () => {
+      try {
+        const response = await fetch('/data/projects.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
+        const data = await response.json();
+        
         // Ensure data.projects exists and is an array
         if (data && Array.isArray(data.projects)) {
           setProjects(data.projects);
@@ -38,21 +33,14 @@ export default function Portfolio() {
           console.warn('Projects data is not in expected format:', data);
           setProjects([]); // Set empty array as fallback
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error loading projects:', error);
         setProjects([]); // Set empty array as fallback
-      });
-  }, []);
+      }
+    };
 
-  // Prevent SSR hydration issues
-  if (!isClient) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400"></div>
-      </div>
-    );
-  }
+    loadProjects();
+  }, []);
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -315,7 +303,9 @@ export default function Portfolio() {
                   <Github className="w-6 h-6" />
                   GitHub Activity
                 </h3>
-                {isClient && <GitHubStats />}
+                <ClientOnly fallback={<div className="animate-pulse h-20 bg-slate-700 rounded"></div>}>
+                  <GitHubStats />
+                </ClientOnly>
               </div>
             </div>
             
@@ -413,7 +403,9 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {projects && projects.length > 0 ? (
               projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ClientOnly key={project.id} fallback={<div className="animate-pulse h-40 bg-slate-700 rounded-xl"></div>}>
+                  <ProjectCard project={project} />
+                </ClientOnly>
               ))
             ) : (
               <div className="col-span-2 text-center text-gray-400">
@@ -442,7 +434,9 @@ export default function Portfolio() {
 
       {/* Technology Stack Section */}
       <section id="technologies">
-        {isClient && <TechnologyStack />}
+        <ClientOnly fallback={<div className="py-20 text-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div></div>}>
+          <TechnologyStack />
+        </ClientOnly>
       </section>
 
       {/* Education Section */}
@@ -470,16 +464,22 @@ export default function Portfolio() {
 
       {/* Medium Articles Section */}
       <section id="articles">
-        {isClient && <MediumIntegration />}
+        <ClientOnly fallback={<div className="py-20 text-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div></div>}>
+          <MediumIntegration />
+        </ClientOnly>
       </section>
 
       {/* Testimonials Section */}
       <section id="testimonials">
-        {isClient && <TestimonialsSection />}
+        <ClientOnly fallback={<div className="py-20 text-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div></div>}>
+          <TestimonialsSection />
+        </ClientOnly>
       </section>
 
       {/* Contact Section */}
-      {isClient && <ContactForm />}
+      <ClientOnly fallback={<div className="py-20 text-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div></div>}>
+        <ContactForm />
+      </ClientOnly>
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-blue-500/20 bg-slate-900">

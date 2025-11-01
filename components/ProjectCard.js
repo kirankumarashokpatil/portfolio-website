@@ -5,6 +5,23 @@ const ProjectCard = ({ project }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
+  // Defensive programming - ensure project is valid
+  if (!project) {
+    return (
+      <div className="bg-gradient-to-br from-blue-900/50 to-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20">
+        <div className="animate-pulse">
+          <div className="h-6 bg-slate-700 rounded w-3/4 mb-4"></div>
+          <div className="h-4 bg-slate-700 rounded w-full mb-2"></div>
+          <div className="h-4 bg-slate-700 rounded w-2/3"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // Safely access nested properties
+  const tags = project.tags || [];
+  const impact = project.impact || {};
+
   const handleVideoClick = () => {
     setShowVideo(true);
   };
@@ -63,9 +80,9 @@ const ProjectCard = ({ project }) => {
         </p>
 
         {/* Impact Metrics */}
-        {project.impact && (
+        {Object.keys(impact).length > 0 && (
           <div className="grid grid-cols-3 gap-4 mb-6">
-            {Object.entries(project.impact).map(([key, value]) => (
+            {Object.entries(impact).map(([key, value]) => (
               <div key={key} className="text-center">
                 <div className="text-lg font-bold text-blue-400">{value}</div>
                 <div className="text-xs text-gray-400 capitalize">{key}</div>
@@ -75,16 +92,18 @@ const ProjectCard = ({ project }) => {
         )}
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 bg-blue-600/30 rounded-full text-sm hover:bg-blue-600/50 transition-colors"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {tags.map((tag, index) => (
+              <span
+                key={`${tag}-${index}`}
+                className="px-3 py-1 bg-blue-600/30 rounded-full text-sm hover:bg-blue-600/50 transition-colors"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Demo Video Button */}
         {project.demoVideo && (

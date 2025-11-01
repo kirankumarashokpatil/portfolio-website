@@ -33,15 +33,21 @@ const TestimonialsSection = () => {
   }, []);
 
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    if (testimonials && testimonials.length > 0) {
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    }
   };
 
   const goToTestimonial = (index) => {
-    setCurrentIndex(index);
+    if (testimonials && testimonials.length > 0 && index >= 0 && index < testimonials.length) {
+      setCurrentIndex(index);
+    }
   };
 
   if (isLoading) {
@@ -53,10 +59,21 @@ const TestimonialsSection = () => {
   }
 
   if (testimonials.length === 0) {
-    return null;
+    return (
+      <section className="py-20 px-4 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              What Others Say
+            </span>
+          </h2>
+          <p className="text-gray-400">Testimonials coming soon...</p>
+        </div>
+      </section>
+    );
   }
 
-  const currentTestimonial = testimonials[currentIndex];
+  const currentTestimonial = testimonials[currentIndex] || testimonials[0];
 
   return (
     <section className="py-20 px-4 bg-slate-900/50">
@@ -162,9 +179,9 @@ const TestimonialsSection = () => {
 
         {/* All Testimonials Grid (Below main display) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
-          {testimonials.slice(0, 6).map((testimonial, index) => (
+          {(testimonials || []).slice(0, 6).map((testimonial, index) => (
             <motion.div
-              key={testimonial.id}
+              key={testimonial.id || index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -177,24 +194,24 @@ const TestimonialsSection = () => {
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    {(testimonial.name || 'Unknown').split(' ').map(n => n[0]).join('').substring(0, 2)}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-white font-semibold text-sm">{testimonial.name}</h4>
-                  <p className="text-blue-400 text-xs">{testimonial.role}</p>
-                  <p className="text-gray-400 text-xs">{testimonial.company}</p>
+                  <h4 className="text-white font-semibold text-sm">{testimonial.name || 'Anonymous'}</h4>
+                  <p className="text-blue-400 text-xs">{testimonial.role || 'Professional'}</p>
+                  <p className="text-gray-400 text-xs">{testimonial.company || 'Company'}</p>
                 </div>
               </div>
               <p className="text-gray-300 text-sm mt-3 line-clamp-3">
-                "{testimonial.content.substring(0, 120)}..."
+                "{(testimonial.content || 'Great work!').substring(0, 120)}..."
               </p>
               <div className="flex mt-3">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     className={`w-3 h-3 ${
-                      i < testimonial.rating
+                      i < (testimonial.rating || 5)
                         ? 'text-yellow-400 fill-current'
                         : 'text-gray-600'
                     }`}

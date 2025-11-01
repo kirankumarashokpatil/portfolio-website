@@ -96,10 +96,10 @@ const TechnologyStack = () => {
 
         {/* Technology Grid */}
         <div className="space-y-12">
-          {technologies && technologies.categories && technologies.categories.length > 0 ? (
+          {technologies && technologies.categories && Array.isArray(technologies.categories) && technologies.categories.length > 0 ? (
             technologies.categories.map((category, categoryIndex) => (
             <motion.div
-              key={category.name}
+              key={category.name || categoryIndex}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -116,9 +116,9 @@ const TechnologyStack = () => {
 
               {/* Technology Cards */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                {category.technologies.map((tech, techIndex) => (
+                {(category.technologies || []).map((tech, techIndex) => (
                   <motion.div
-                    key={tech.name}
+                    key={`${tech.name}-${techIndex}` || techIndex}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -129,12 +129,12 @@ const TechnologyStack = () => {
                   >
                     {/* Technology Icon/Emoji */}
                     <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">
-                      {tech.icon}
+                      {tech.icon || '🔧'}
                     </div>
 
                     {/* Technology Name */}
                     <h4 className="text-white font-bold text-center text-sm mb-2 group-hover:text-white transition-colors">
-                      {tech.name}
+                      {tech.name || 'Unknown'}
                     </h4>
 
                     {/* Proficiency Bar */}
@@ -150,7 +150,7 @@ const TechnologyStack = () => {
                           'from-gray-400 to-gray-600'
                         }`}
                         initial={{ width: 0 }}
-                        whileInView={{ width: `${tech.proficiency}%` }}
+                        whileInView={{ width: `${tech.proficiency || 0}%` }}
                         viewport={{ once: true }}
                         transition={{ delay: (categoryIndex * 0.1) + (techIndex * 0.05) + 0.5, duration: 1 }}
                       />
@@ -158,12 +158,12 @@ const TechnologyStack = () => {
 
                     {/* Proficiency Percentage */}
                     <p className="text-xs text-center text-gray-400">
-                      {tech.proficiency}%
+                      {tech.proficiency || 0}%
                     </p>
 
                     {/* Hover Tooltip */}
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10">
-                      {tech.description}
+                      {tech.description || 'No description available'}
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
                     </div>
                   </motion.div>
