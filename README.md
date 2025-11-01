@@ -290,4 +290,5 @@ MIT License - feel free to use this portfolio template for your own projects!
 
 **Ready to impress?** Your portfolio will auto-update, look professional, and showcase your technical skills! 🎉
 #   P o r t f o l i o   U p d a t e  
+ #   F o r c e   d e p l o y m e n t   r e b u i l d  
  
